@@ -2,6 +2,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import Display from "./Display";
+import 'jest-dom/extend-expect';
 
 test ("Display is locked and closed when passed locked=true and closed=true", () => {
   const closeLock = render(<Display locked={true} closed={true} />);
@@ -30,3 +31,10 @@ test("When open and unlocked, is green-led class", () => {
   expect(open.classList.contains("green-led")).toBe(true);
   expect(unlocked.classList.contains("green-led")).toBe(true);
 });
+
+test("Defaults to open and unlocked", () => {
+  const defaultLoad = render(<Display />);
+  defaultLoad.getByText(/open/i);
+  defaultLoad.getByText(/unlocked/i);
+  
+})
